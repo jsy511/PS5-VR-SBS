@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PS5 VR SBS</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         html, body {
             margin: 0;
             width: 100%;
             height: 100%;
-            background: black;
+            background: #000;
             overflow: hidden;
         }
 
@@ -28,27 +30,67 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        video {
+        .eye video {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+        }
+
+        #message {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            background: rgba(0,0,0,.75);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            z-index: 10;
         }
     </style>
 </head>
 
 <body>
 
-    <div id="vr">
-        <div class="eye">
-            <video id="left" autoplay playsinline></video>
-        </div>
-
-        <div class="eye">
-            <video id="right" autoplay playsinline></video>
-        </div>
+    <div id="message">
+        PS5 VR • SBS TEST
     </div>
+
+    <main id="vr">
+
+        <section class="eye">
+            <video id="leftEye" autoplay muted playsinline></video>
+        </section>
+
+        <section class="eye">
+            <video id="rightEye" autoplay muted playsinline></video>
+        </section>
+
+    </main>
+
+    <script>
+        /*
+         * Temporary test:
+         * The same video stream will eventually be replaced
+         * by the two-eye PS5/ACC stream.
+         */
+
+        const leftEye = document.getElementById("leftEye");
+        const rightEye = document.getElementById("rightEye");
+
+        // Placeholder for our future video stream.
+        window.setVRStream = function(stream) {
+            leftEye.srcObject = stream;
+            rightEye.srcObject = stream;
+
+            leftEye.play();
+            rightEye.play();
+        };
+    </script>
 
 </body>
 </html>
