@@ -1,96 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PS5 VR SBS</title>
+    <title>PS5 VR SBS</title><style>
+    * {
+        box-sizing: border-box;
+    }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+    html, body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
 
-        html, body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            overflow: hidden;
-        }
+    #vr {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+    }
 
-        #vr {
-            display: flex;
-            width: 100vw;
-            height: 100vh;
-        }
+    .eye {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
 
-        .eye {
-            width: 50%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+    .eye video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background: #000;
+    }
 
-        .eye video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    #message {
+        position: fixed;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        background: rgba(0, 0, 0, 0.75);
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 10;
+        text-align: center;
+    }
+</style>
 
-        #message {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            background: rgba(0,0,0,.75);
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-family: Arial, sans-serif;
-            z-index: 10;
-        }
-    </style>
-</head>
+</head><body><div id="message">
+    <span id="status">PS5 VR • SBS TEST</span>
+</div>
+
+<main id="vr">
+
+    <section class="eye">
+        <video
+            id="leftEye"
+            autoplay
+            muted
+            playsinline>
+        </video>
+    </section>
+
+    <section class="eye">
+        <video
+            id="rightEye"
+            autoplay
+            muted
+            playsinline>
+        </video>
+    </section>
+
+</main>
+
+<script>
+    const leftEye = document.getElementById("leftEye");
+    const rightEye = document.getElementById("rightEye");
+
+    window.setVRStream = function(stream) {
+        leftEye.srcObject = stream;
+        rightEye.srcObject = stream;
+
+        leftEye.play().catch(() => {});
+        rightEye.play().catch(() => {});
+    };
+</script>
+
 <script src="script.js"></script>
-<body>
 <script src="stream.js"></script>
-    <div id="message">
-        PS5 VR • SBS TEST
-    </div>
-
-    <main id="vr">
-
-        <section class="eye">
-            <video id="leftEye" autoplay muted playsinline></video>
-        </section>
-
-        <section class="eye">
-            <video id="rightEye" autoplay muted playsinline></video>
-        </section>
-
-    </main>
-
-    <script>
-        /*
-         * Temporary test:
-         * The same video stream will eventually be replaced
-         * by the two-eye PS5/ACC stream.
-         */
-
-        const leftEye = document.getElementById("leftEye");
-        const rightEye = document.getElementById("rightEye");
-
-        // Placeholder for our future video stream.
-        window.setVRStream = function(stream) {
-            leftEye.srcObject = stream;
-            rightEye.srcObject = stream;
-
-            leftEye.play();
-            rightEye.play();
-        };
-    </script>
 
 </body>
-</html>
+</html>          
+            
+
+         
