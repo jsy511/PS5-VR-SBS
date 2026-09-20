@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PS5 VR SBS</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+        }
+
+        #vr {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .eye {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="vr">
+        <div class="eye">
+            <video id="left" autoplay playsinline></video>
+        </div>
+
+        <div class="eye">
+            <video id="right" autoplay playsinline></video>
+        </div>
+    </div>
+
+</body>
+</html>
